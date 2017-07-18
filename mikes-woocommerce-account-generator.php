@@ -10,7 +10,7 @@ License: GPLv2
 */
 include "classes/confinedspaces.php";
 
-add_filter(‘user_profile_update_errors’,’allow_no_email’,10,3);
+add_filter('user_profile_update_errors','allow_no_email',10,3);
 	function allow_no_email($errors, $update, $users) {
 		if (isset($errors->errors[‘invalid_email’]) &&
 			$users->user_email=’a’) { unset ($errors->errors);
