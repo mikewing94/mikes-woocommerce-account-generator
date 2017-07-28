@@ -14,6 +14,8 @@ function do_confined(){
 			$order = new WC_Order( $order_id );
 			// do some stuff here
 			// Getting the items in the order
+			$current_user = wp_get_current_user();
+			$current_email = $current_user->user_email;
 			
 			global $wpdb;
 			$ccdbs = $wpdb->get_results( $wpdb->prepare("SELECT `key_id`, `order_id`, `activation_email`, `license_key`, `software_product_id`, `activations_limit`, `created` FROM `wp_woocommerce_software_licenses` WHERE order_id = $order_id "));
@@ -63,16 +65,18 @@ function do_confined(){
 					$user = new WP_User( $user_id );
 					$user->set_role( 'confined' );
 					// Email the user
-					wp_mail( $email_address, 'Welcome!', 'Your Password: ' . $password );
+					//wp_mail( $email_address, 'Welcome!', 'Your Password: ' . $password );
+					wp_mail( $current_email, 'New User Details', 'Username ='.$email_address.'Password ='.$password);
 					//
 					echo "New User Succesfully Added!";
 					echo "</br>";
+					
 				} // end if
 			}
 			}
 			echo "SCRIPT COMPLETED SUCCESFULLY!!";
 			// Email the user
-			wp_mail( 'michael.wing@rocketmail.com', 'Testing Order Complete', 'Order id ='.$order_id);
+			wp_mail( 'michael.wing@rocketmail.com', 'Order Succesfully Completed', 'Order id ='.$order_id);
 		}
 	};
 	function confinedcheck() {
