@@ -13,11 +13,26 @@ function do_confined(){
 			// order object (optional but handy)
 			$order = new WC_Order( $order_id );
 			// do some stuff here
+			// Getting the items in the order
+			
 			global $wpdb;
 			$ccdbs = $wpdb->get_results( $wpdb->prepare("SELECT `key_id`, `order_id`, `activation_email`, `license_key`, `software_product_id`, `activations_limit`, `created` FROM `wp_woocommerce_software_licenses` WHERE order_id = $order_id "));
 			echo "</br>";
 			echo "License Keys";
-			foreach ($ccdbs as $ccdb)
+			$order_items = $order->get_items();
+			// Iterating through each item in the order
+			foreach ($order_items as $item_id => $item_data) {
+    	// Get the product name
+    	$product_name = $item_data['name'];
+    	// Get the item quantity
+    	$item_quantity = $order->get_item_meta($item_id, '_qty', true);
+    	// Get the item line total
+    	$item_total = $order->get_item_meta($item_id, '_line_total', true);
+
+    	// Displaying this data (to check)
+    	echo 'Product name: '.$product_name.' | Quantity: '.$item_quantity.' | Item total: '. $item_total;
+
+			for($x = 1; $x <=$item_quantity; $x = $x +1)
 			{
 				echo "</br>";
 				// Here you can access to every object value in the way that you want
@@ -28,7 +43,11 @@ function do_confined(){
 				echo "</br>";
 				echo "PLEASE WAIT";
 				echo "</br>";
-				$email_address = $likey;
+				$Space = "SPACE";
+				$random = mt_rand(100000,500000);
+				$newusername = $Space . $random;
+				
+				$email_address = $newusername;
 				if( null == username_exists( $email_address ) ) {
 					// Generate the password and create the user
 					$password = "hellomrsl";
@@ -49,6 +68,7 @@ function do_confined(){
 					echo "New User Succesfully Added!";
 					echo "</br>";
 				} // end if
+			}
 			}
 			echo "SCRIPT COMPLETED SUCCESFULLY!!";
 			// Email the user
