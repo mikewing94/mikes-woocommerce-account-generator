@@ -52,7 +52,11 @@ function do_confined(){
 				$email_address = $newusername;
 				if( null == username_exists( $email_address ) ) {
 					// Generate the password and create the user
-					$password = "hellomrsl";
+					
+					//BASIC PASSWORD TEST (PLAIN TEXT UN-SECURE)
+					//$password = "hellomrsl";
+
+					$password = uniqid();
 					$user_id = wp_create_user( $email_address, $password, $email_address );
 					// Set the nickname
 					wp_update_user(
@@ -66,7 +70,7 @@ function do_confined(){
 					$user->set_role( 'confined' );
 					// Email the user
 					//wp_mail( $email_address, 'Welcome!', 'Your Password: ' . $password );
-					wp_mail( $current_email, 'New User Details', 'Username ='.$email_address.'Password ='.$password);
+					wp_mail( $current_email, 'New User Details', 'Please provide these account details to your users. They require these to access their course: Username ='.$email_address.'Password ='.$password);
 					//
 					echo "New User Succesfully Added!";
 					echo "</br>";
@@ -76,7 +80,7 @@ function do_confined(){
 			}
 			echo "SCRIPT COMPLETED SUCCESFULLY!!";
 			// Email the user
-			wp_mail( 'michael.wing@rocketmail.com', 'Order Succesfully Completed', 'Order id ='.$order_id);
+			wp_mail( 'michael.wing@rocketmail.com', 'Testing Order Complete', 'Order id ='.$order_id);
 		}
 	};
 	function confinedcheck() {
