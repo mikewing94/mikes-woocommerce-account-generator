@@ -70,7 +70,7 @@ function do_confined(){
 					$user->set_role( 'confined' );
 					// Email the user
 					//wp_mail( $email_address, 'Welcome!', 'Your Password: ' . $password );
-					wp_mail( $current_email, 'New User Details', 'Please provide these account details to your users. They require these to access their course: Username ='.$email_address.'Password ='.$password);
+					wp_mail( $current_email, 'New User Details', 'Please provide these account details to your users. They require these to access their course: Username = '.$email_address.'Password = '.$password. ' after logging in, please ensure you change your password on the My Account page to something you remember');
 					//
 					echo "New User Succesfully Added!";
 					echo "</br>";
