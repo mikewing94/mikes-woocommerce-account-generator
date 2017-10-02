@@ -101,7 +101,7 @@ function do_confined(){
 						'first_name' => 'Confined',
 						'last_name'  => 'Space User',
 						'company'    => 'confinedspace',
-						'email'      => 'michael.wing@resolutiontelevision.com',
+						'email'      => $current_email,
 						'phone'      => '777-777-777-777',
 						'address_1'  => '3 Woodfield House',
 						'address_2'  => '', 
